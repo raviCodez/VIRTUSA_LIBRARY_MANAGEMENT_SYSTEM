@@ -2,8 +2,9 @@
 import java.util.List;
 
 public class Member {
-    private String username;
-    private List<Book> borrowedBooks;
+    public static Object loggedInMember;
+    public String username;
+    public List<Book> borrowedBooks;
 
     Member(String username) {
         this.username = username;
