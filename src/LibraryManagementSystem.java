@@ -52,7 +52,7 @@ public class LibraryManagementSystem {
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
 //checks for existing username in members , or else create new object        
-        Member loggedInMember = findOrCreateMember(username);
+        loggedInMember = findOrCreateMember(username);
         System.out.println("Logged in as user.");
         userMenu();
     }
@@ -119,8 +119,8 @@ public class LibraryManagementSystem {
             System.out.println("2. Return Book");
             System.out.println("3. Display All Books");
             System.out.println("4. Display All Members");
-            System.out.println("5. Exit");
-
+            System.out.println("5. Search Book");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -139,8 +139,13 @@ public class LibraryManagementSystem {
                     displayAllMembers();
                     break;
                 case 5:
+                    searchBook();
+                    break;
+
+                case 6:
                     System.out.println("Exiting user menu.");
                     return;
+              
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
@@ -215,7 +220,7 @@ public class LibraryManagementSystem {
 
         Book book=findBookByTitle(title);
 
-        if(book!=null && loggedInMember.borrowedBooks(book)){
+        if(book!=null && loggedInMember.borrowBooks(book)){
             System.out.println("Book borrowed successfully.");
         }
         else{
@@ -263,6 +268,33 @@ public class LibraryManagementSystem {
      }
 
 
+private static void searchBook() {
+    System.out.println("Search by:");
+    System.out.println("1. Title");
+    System.out.println("2. Author");
+
+    int choice = scanner.nextInt();
+    scanner.nextLine();
+
+    System.out.print("Enter keyword: ");
+    String keyword = scanner.nextLine().toLowerCase();
+
+    boolean found = false;
+
+    for (Book book : books) {
+        if ((choice == 1 && book.title.toLowerCase().contains(keyword)) ||
+            (choice == 2 && book.author.toLowerCase().contains(keyword))) {
+
+            System.out.println(book.title + " by " + book.author +
+                    " - " + (book.isAvailable ? "Available" : "Not Available"));
+            found = true;
+        }
+    }
+
+    if (!found) {
+        System.out.println("No matching books found.");
+    }
+}
     
 
 }
