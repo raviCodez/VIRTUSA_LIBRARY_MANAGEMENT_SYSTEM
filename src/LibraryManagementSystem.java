@@ -13,8 +13,7 @@ public class LibraryManagementSystem {
         
     public static void main(String[] args) throws Exception {
 
-        books.add(new Book("Java Programming", "John Doe", "Programming"));
-        books.add(new Book("Python Programming", "Jane Doe", "Programming"));
+        
         
         while(true){
             System.out.println("Welcome to the Library Management System");
